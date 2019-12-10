@@ -18,7 +18,7 @@
                     <td>{{ home.address }}</td>
                     <td>{{ home.type }}</td>
                     <td>
-                        <button>Edit</button>
+                        <button @click="editMode(home.id)">Edit</button>
                         <button @click="$emit('delete:home', home.id)">Delete</button>
                     </td>
                 </tr>
@@ -33,6 +33,21 @@
         props: {
             homes: Array,
         },
+        data() {
+            return {
+                editing: null,
+            }
+        },
+        methods: {
+            editMode(id) {
+                this.editing = id;
+            },
+            editHome(home) {
+                if (home.name === '' || home.address === '' || home.type === '') return
+                this.$emit('edit:home', home.id, home)
+                this.editing = null
+            }
+        }
     }
 </script>
 
