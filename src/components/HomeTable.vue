@@ -16,7 +16,7 @@
                     <td>{{ home.type }}</td>
                     <td>
                         <button>Edit</button>
-                        <button>Delete</button>
+                        <button @click="$emit('delete:home', home.id)">Delete</button>
                     </td>
                 </tr>
             </tbody>
