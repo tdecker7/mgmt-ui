@@ -31,7 +31,7 @@
                         <button class="muted-button" @click="cancelEdit(home)">Cancel</button>
                     </td>
                     <td v-else>
-                        <button @click="editMode(home.id)">Edit</button>
+                        <button @click="editMode(home)">Edit</button>
                         <button @click="$emit('delete:home', home.id)">Delete</button>
                     </td>
                 </tr>
@@ -52,9 +52,9 @@
             }
         },
         methods: {
-            editMode(id) {
+            editMode(home) {
                 this.cachedHome = Object.assign({}, home)
-                this.editing = id;
+                this.editing = home.id;
             },
             editHome(home) {
                 if (home.name === '' || home.address === '' || home.type === '') return
