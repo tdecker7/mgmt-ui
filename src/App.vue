@@ -1,7 +1,11 @@
 <template>
   <div id="app" class="small-container">
     <h1>Homes</h1>
-    <home-table :homes="homes" @delete:home="deleteHome"/>
+    <home-table 
+      :homes="homes" 
+      @delete:home="deleteHome"
+      @edit:home="editHome"
+    />
     <home-form @add:home="addHome" />
   </div>
 </template>
@@ -47,6 +51,11 @@ export default {
     deleteHome(id) {
       this.homes = this.homes.filter(
         home => home.id !== id
+      )
+    },
+    editHome(id, updatedHome) {
+      this.homes = this.homes.map(home => 
+        home.id === id ? updatedHome : home
       )
     }
   }
