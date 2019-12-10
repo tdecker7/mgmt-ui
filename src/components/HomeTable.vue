@@ -1,5 +1,8 @@
 <template>
     <div id="home-table">
+        <p v-if="homes.length < 1" class="empty-table">
+            No homes
+        </p>
         <table>
             <thead>
                 <tr>

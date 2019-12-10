@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="small-container">
     <h1>Homes</h1>
-    <home-table :homes="homes"/>
+    <home-table :homes="homes" @delete:home="deleteHome"/>
     <home-form @add:home="addHome" />
   </div>
 </template>
@@ -43,6 +43,11 @@ export default {
   methods: {
     addHome(home) {
       this.homes = [...this.homes, home]
+    },
+    deleteHome(id) {
+      this.homes = this.homes.filter(
+        home => home.id !== id
+      )
     }
   }
 }
