@@ -14,10 +14,23 @@
             </thead>
             <tbody>
                 <tr v-for="home in homes" :key="home.id">
-                    <td>{{ home.name }}</td>
-                    <td>{{ home.address }}</td>
-                    <td>{{ home.type }}</td>
-                    <td>
+                    <td v-if="editing === home.id">
+                        <input type="text" v-model="home.name" />
+                    </td>
+                    <td v-else>{{ home.name }}</td>
+                    <td v-if="editing === home.id">
+                        <input type="text" v-model="home.address" />
+                    </td>
+                    <td v-else>{{ home.address }}</td>
+                    <td v-if="editing === home.id">
+                        <input type="text" v-model="home.type" />
+                    </td>
+                    <td v-else>{{ home.type }}</td>
+                    <td v-if="editing === home.id">
+                        <button @click="editHome(home)">Save</button>
+                        <button class="muted-button" @click="cancelEdit(home)">Cancel</button>
+                    </td>
+                    <td v-else>
                         <button @click="editMode(home.id)">Edit</button>
                         <button @click="$emit('delete:home', home.id)">Delete</button>
                     </td>
@@ -40,11 +53,16 @@
         },
         methods: {
             editMode(id) {
+                this.cachedHome = Object.assign({}, home)
                 this.editing = id;
             },
             editHome(home) {
                 if (home.name === '' || home.address === '' || home.type === '') return
                 this.$emit('edit:home', home.id, home)
+                this.editing = null
+            },
+            cancelEdit(home) {
+                Object.assign(home, this.cachedHome)
                 this.editing = null
             }
         }
