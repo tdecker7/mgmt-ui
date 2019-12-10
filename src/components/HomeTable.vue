@@ -6,6 +6,7 @@
                     <th>Home Name</th>
                     <th>Home Address</th>
                     <th>Home Type</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -13,6 +14,10 @@
                     <td>{{ home.name }}</td>
                     <td>{{ home.address }}</td>
                     <td>{{ home.type }}</td>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
